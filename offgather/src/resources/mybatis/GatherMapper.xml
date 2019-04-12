@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="offgather.engagement.gather.GatherMapper">
+	<resultMap id="gatherResultMap" type="gather">
+		<id column="GATHER_IDNUM" property="gatherIdnum" />
+		<result column="GROUP_IDNUM" property="groupIdnum" />
+		<result column="GATHER_TIME" property="gatherTime" />
+		<result column="GATHER_MAXNUM" property="gatherMaxNum" />
+		<result column="GATHER_TITLE" property="gatherTitle" />
+		<result column="GATHER_DESCRIBE" property="gatherDescribe" />
+		<result column="GATHER_PHOTO" property="gatherPhoto" />
+		<result column="GATHER_DATE" property="gatherDate" />
+		<result column="GATHER_LOCATION" property="gatherLocation" />
+		<result column="GATHER_ISPUBLIC" property="gatherIsPublic" />
+	</resultMap>
+	
+	<select id="list" parameterType="gather" resultMap="gatherResultMap">
+		SELECT GATHER_IDNUM, GROUP_IDNUM, GATHER_TIME, GATHER_MAXNUM, GATHER_TITLE, GATER_DESCRIBE, GATHER_PHOTO, GATHER_DATE, GATHER_LOCATION, GATHER_ISPUBLIC
+		FROM GATHER
+		<where>
+			<if test="gatherIdnum > 0">
+				AND GATHER_IDNUM = #{gatherIdnum}
+			</if>
+			<if test="groupIdnum > 0">
+				AND GROUP_IDNUM = #{groupIdnum}
+			</if>
+			<if test="gatherTime > 0">
+				AND GATHER_TIME = #{gatherTime}
+			</if>
+			<if test="gatherMaxNum > 0">
+				AND GATHER_MAXNUM = #{gatherMaxNum}
+			</if>
+			<if test="gatherTitle != null and gatherTitle != ''">
+				AND GATHER_TITLE = #{gatherTitle}
+			</if>
+			<if test="gatherDescribe != null and gatherDescribe != ''">
+				AND GATHER_DESCRIBE = #{gatherDescribe}
+			</if>
+			<if test="gatherPhoto != null and gatherPhoto != ''">
+				AND GATHER_PHOTO = #{gatherPhoto}
+			</if>
+			<if test="gatherDate != null and gatherDate != ''">
+				AND GATHER_DATE = #{gatherDate}
+			</if>
+			<if test="gatherLocation != null and gatherLocation != ''">
+				AND GATHER_LOCATION = #{gatherLocation}
+			</if>
+			<if test="gatherIsPublic != null and gatherIsPublic != ''">
+				AND GATHER_ISPUBLIC = #{gatherIspublic}
+			</if>
+		</where>
+	</select>
+</mapper>
